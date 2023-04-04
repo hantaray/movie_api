@@ -19,3 +19,15 @@ Timestamp: Mon Apr 03 2023 21:06:58 GMT+0200 (Mitteleuropäische Sommerzeit)
 URL: /documentation
 Timestamp: Mon Apr 03 2023 21:07:12 GMT+0200 (Mitteleuropäische Sommerzeit)
 
+URL: /
+Timestamp: Mon Apr 03 2023 21:24:33 GMT+0200 (Mitteleuropäische Sommerzeit)
+
+URL: /favicon.ico
+Timestamp: Mon Apr 03 2023 21:24:33 GMT+0200 (Mitteleuropäische Sommerzeit)
+
+URL: /documentation
+Timestamp: Mon Apr 03 2023 21:24:41 GMT+0200 (Mitteleuropäische Sommerzeit)
+
+URL: /index
+Timestamp: Mon Apr 03 2023 21:24:48 GMT+0200 (Mitteleuropäische Sommerzeit)
+
