@@ -1,14 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie API</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Documentation</h1>
     <h2>With this API you can get all the information about your favourite movies!</h2>
+    <table>
+        <tr>
+            <th>Business logic</th>
+            <th>URL</th>
+            <th>HTTP Method</th>
+            <th>Request body data format</th>
+            <th>Response body data format</th>
+        </tr>
+        <tr>
+            <td>Return a list of ALL movies to the user</td>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data about all the movies.</td>
+        </tr>
+        <tr>
+            <td>Return data about a single movie by title to the user</td>
+            <td>/movies/[Title]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data about a single movie, containing an ID, title, description, genre, director,
+                image URL, whether it’s featured or not. Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;id : 1,<br>
+                    &nbsp;&nbsp;title : "Oldboy",<br>
+                    &nbsp;&nbsp;description : "...",<br>
+                    &nbsp;&nbsp;genre : "Thriller",<br>
+                    &nbsp;&nbsp;director : "Park Chan-wook",<br>
+                    &nbsp;&nbsp;imageURL : "...",<br>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Return data about a genre by genrename</td>
+            <td>/movies/[Genre]/[Genrename]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data about the genre, containing ID, genreName and description.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;id : 1,<br>
+                    &nbsp;&nbsp;genreName : "Thriller",<br>
+                    &nbsp;&nbsp;description : "...",<br>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Return data about a director by Name</td>
+            <td>/movies/[Directors]/[Name]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data about the director, containing ID, name, bio, birthyear and deathyear.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;id : 1,<br>
+                    &nbsp;&nbsp;name : "Wes Craven",<br>
+                    &nbsp;&nbsp;bio : "...",<br>
+                    &nbsp;&nbsp;yearBirth : 1939,<br>
+                    &nbsp;&nbsp;yearDeath : 2015,<br>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Add User</td>
+            <td>/users</td>
+            <td>POST</td>
+            <td>A JSON object holding data about the user to add.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;name : "Sam",<br>
+                    }
+                </div>
+            </td>
+            <td>A JSON object holding data about the user that was added, including an ID:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;id : 5,<br>
+                    &nbsp;&nbsp;name : "Sam",<br>
+                    &nbsp;&nbsp;favoriteMovies : []<br>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Update the username of a user by username</td>
+            <td>/users/[Username]</td>
+            <td>PUT</td>
+            <td>A JSON object holding data about the user to update.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;name : "Sammmy",<br>
+                    }
+                </div>
+            </td>
+            <td>A JSON object holding the updated data about the user:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;id : 5,<br>
+                    &nbsp;&nbsp;name : "Sammmy",<br>
+                    &nbsp;&nbsp;favoriteMovies : []<br>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Allow users to add a movie to their list of favorites</td>
+            <td>/users/[Name]/[Movies]/[MovieID]</td>
+            <td>PUT</td>
+            <td>A JSON object holding data about the movie to add.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;title : "Taxi Driver",<br>
+                    }
+                </div>
+            </td>
+            <td>A text message indicating the movie was added to favoriteMovies of th user.</td>
+        </tr>
+        <tr>
+            <td>Allow users to remove a movie from their list of favorites</td>
+            <td>/users/[Name]/[Movies]/[MovieID]</td>
+            <td>DELETE</td>
+            <td>A JSON object holding data about the movie to remove and the user.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;title : "Taxi Driver",<br>
+                    }
+                </div>
+            </td>
+            <td>A text message indicating that the movie was removed from favoriteMovies of the user.</td>
+        </tr>
+        <tr>
+            <td>Allow existing users to deregister</td>
+            <td>/users/[Username]</td>
+            <td>DELETE</td>
+            <td>A JSON object holding data about the user to remove.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;user : "Sam",<br>
+                    }
+                </div>
+            </td>
+            <td>A text message indicating that the user was deleted.</td>
+        </tr>
+    </table>
     
 </body>
+
 </html>
