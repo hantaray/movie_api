@@ -19,7 +19,7 @@
 
 <body>
     <h1>Documentation</h1>
-    <h2>With this API you can get all the information about your favourite movies!</h2>
+    <h2>With this API you can get all the information about your favorite movies!</h2>
     <table>
         <tr>
             <th>Business logic</th>
@@ -68,8 +68,8 @@
             </td>
         </tr>
         <tr>
-            <td>Return data about a genre by genrename</td>
-            <td>/movies/[Genre]/[Genrename]</td>
+            <td>Return data about a genre by genreName</td>
+            <td>/movies/genre/[Genrename]</td>
             <td>GET</td>
             <td>None</td>
             <td>A JSON object holding data about the genre, containing ID, genreName and description.
@@ -86,7 +86,7 @@
         </tr>
         <tr>
             <td>Return data about a director by Name</td>
-            <td>/movies/[Directors]/[Name]</td>
+            <td>/movies/directors/[directorName]</td>
             <td>GET</td>
             <td>None</td>
             <td>A JSON object holding data about the director, containing ID, name, bio, birthyear and deathyear.
@@ -113,6 +113,7 @@
                 <div style="color: blue;">
                     {<br>
                     &nbsp;&nbsp;name : "Sam",<br>
+                    &nbsp;&nbsp;favoriteMovies : []<br>
                     }
                 </div>
             </td>
