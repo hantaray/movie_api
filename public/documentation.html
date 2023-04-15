@@ -40,7 +40,7 @@
             <td>/movies/[Title]</td>
             <td>GET</td>
             <td>None</td>
-            <td>A JSON object holding data about a single movie, containing an ID, title, description, genre, director,
+            <td>A JSON object holding data about a single movie, containing an ID, title, description, genres, director,
                 image URL, whether it’s featured or not. Example:
                 <br>
                 <div style="color: blue;">
@@ -48,7 +48,7 @@
                     &nbsp;&nbsp;id : 1,<br>
                     &nbsp;&nbsp;title : "Oldboy",<br>
                     &nbsp;&nbsp;description : "...",<br>
-                    &nbsp;&nbsp;genre: [<br>
+                    &nbsp;&nbsp;genres: [<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;{<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: 1,<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: "thriller",<br>
@@ -69,10 +69,10 @@
         </tr>
         <tr>
             <td>Return data about a genre by genreName</td>
-            <td>/movies/genre/[Genrename]</td>
+            <td>/movies/genres/[Genrename]</td>
             <td>GET</td>
             <td>None</td>
-            <td>A JSON object holding data about the genre, containing ID, genreName and description.
+            <td>A JSON object holding data about the genres, containing ID, genreName and description.
                 Example:
                 <br>
                 <div style="color: blue;">
@@ -129,18 +129,10 @@
             </td>
         </tr>
         <tr>
-            <td>Update the username of a user by username</td>
-            <td>/users/[Username]</td>
+            <td>Update the username of a user by user-id</td>
+            <td>/users/[UserID]</td>
             <td>PUT</td>
-            <td>A JSON object holding data about the user to update.
-                Example:
-                <br>
-                <div style="color: blue;">
-                    {<br>
-                    &nbsp;&nbsp;name : "Sam",<br>
-                    }
-                </div>
-            </td>
+            <td>None</td>
             <td>A JSON object holding the updated data about the user:
                 <br>
                 <div style="color: blue;">
@@ -154,47 +146,23 @@
         </tr>
         <tr>
             <td>Allow users to add a movie to their list of favorites</td>
-            <td>/users/[Name]/[Movies]/[MovieID]</td>
-            <td>PUT</td>
-            <td>A JSON object holding data about the movie to add.
-                Example:
-                <br>
-                <div style="color: blue;">
-                    {<br>
-                    &nbsp;&nbsp;title : "Taxi Driver",<br>
-                    }
-                </div>
-            </td>
-            <td>A text message indicating the movie was added to favoriteMovies of th user.</td>
+            <td>/users/[UserID]/[MovieTitle]</td>
+            <td>POST</td>
+            <td>None</td>
+            <td>A text message indicating the movie was added to favoriteMovies of the user.</td>
         </tr>
         <tr>
             <td>Allow users to remove a movie from their list of favorites</td>
-            <td>/users/[Name]/[Movies]/[MovieID]</td>
+            <td>/users/[UserID]/[MovieTitle]</td>
             <td>DELETE</td>
-            <td>A JSON object holding data about the movie to remove and the user.
-                Example:
-                <br>
-                <div style="color: blue;">
-                    {<br>
-                    &nbsp;&nbsp;title : "Taxi Driver",<br>
-                    }
-                </div>
-            </td>
+            <td>None</td>
             <td>A text message indicating that the movie was removed from favoriteMovies of the user.</td>
         </tr>
         <tr>
             <td>Allow existing users to deregister</td>
-            <td>/users/[Username]</td>
+            <td>/users/[UserID]</td>
             <td>DELETE</td>
-            <td>A JSON object holding data about the user to remove.
-                Example:
-                <br>
-                <div style="color: blue;">
-                    {<br>
-                    &nbsp;&nbsp;user : "Sam",<br>
-                    }
-                </div>
-            </td>
+            <td>None</td>
             <td>A text message indicating that the user was deleted.</td>
         </tr>
     </table>
