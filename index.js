@@ -28,7 +28,13 @@ let topMovies = [
         id: 1,
         title: "Oldboy",
         description: "...",
-        genre: "thriller",
+        genre: [
+            {
+                id: 1,
+                name: "thriller",
+                description: "..."
+            }
+        ],
         director: {
             id: 1,
             name: "Park Chan-wook",
@@ -42,7 +48,13 @@ let topMovies = [
         id: 2,
         title: 'Taxi Driver',
         description: "...",
-        genre: "thriller",
+        genre: [
+            {
+                id: 1,
+                name: "thriller",
+                description: "..."
+            }
+        ],
         director: {
             id: 2,
             name: "Martin Scorsese",
@@ -56,7 +68,13 @@ let topMovies = [
         id: 3,
         title: "Léon: The Professional",
         description: "...",
-        genre: "action-thriller",
+        genre: [
+            {
+                id: 2,
+                name: "action-thriller",
+                description: "..."
+            }
+        ],
         director: {
             id: 3,
             name: "Luc Besson",
@@ -70,7 +88,13 @@ let topMovies = [
         id: 4,
         title: "Big Fish",
         description: "...",
-        genre: "comedy-drama",
+        genre: [
+            {
+                id: 3,
+                name: "comedy-drama",
+                description: "..."
+            }
+        ],
         director: {
             id: 4,
             name: "Tim Burton",
@@ -84,7 +108,13 @@ let topMovies = [
         id: 5,
         title: "The Last Samurai",
         description: "...",
-        genre: "historical drama",
+        genre: [
+            {
+                id: 4,
+                name: "historical drama",
+                description: "..."
+            }
+        ],
         director: {
             id: 5,
             name: "Edward Zwick",
@@ -98,7 +128,13 @@ let topMovies = [
         id: 6,
         title: "Schindler\'s List",
         description: "...",
-        genre: "historical drama",
+        genre: [
+            {
+                id: 4,
+                name: "historical drama",
+                description: "..."
+            }
+        ],
         director: {
             id: 6,
             name: "Steven Spielberg",
@@ -112,7 +148,13 @@ let topMovies = [
         id: 7,
         title: "Full Metal Jacket",
         description: "...",
-        genre: "war",
+        genre: [
+            {
+                id: 5,
+                name: "war",
+                description: "..."
+            }
+        ],
         director: {
             id: 7,
             name: "Stanley Kubrick",
@@ -126,7 +168,13 @@ let topMovies = [
         id: 8,
         title: "The New World",
         description: "...",
-        genre: "drama",
+        genre: [
+            {
+                id: 6,
+                name: "drama",
+                description: "..."
+            }
+        ],
         director: {
             id: 8,
             name: "Terrence Malick",
@@ -140,7 +188,13 @@ let topMovies = [
         id: 9,
         title: "Grand Budapest Hotel",
         description: "...",
-        genre: "comedy-drama",
+        genre: [
+            {
+                id: 3,
+                name: "comedy-drama",
+                description: "..."
+            }
+        ],
         director: {
             id: 9,
             name: "Wes Anderson",
@@ -154,7 +208,13 @@ let topMovies = [
         id: 10,
         title: "This Is England",
         description: "...",
-        genre: "drama",
+        genre: [
+            {
+                id: 6,
+                name: "drama",
+                description: "..."
+            }
+        ],
         director: {
             id: 10,
             name: "Shane Meadows",
