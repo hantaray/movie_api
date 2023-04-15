@@ -9,15 +9,13 @@ let topMovies = [
         title: "Oldboy",
         description: "...",
         genre: "thriller",
-        director: [
-            {
-                id: 1,
-                name: "Park Chan-wook",
-                bio: "...",
-                yearBirth: 1963,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 1,
+            name: "Park Chan-wook",
+            bio: "...",
+            yearBirth: 1963,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -25,15 +23,13 @@ let topMovies = [
         title: 'Taxi Driver',
         description: "...",
         genre: "thriller",
-        director: [
-            {
-                id: 2,
-                name: "Martin Scorsese",
-                bio: "...",
-                yearBirth: 1942,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 2,
+            name: "Martin Scorsese",
+            bio: "...",
+            yearBirth: 1942,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -41,15 +37,13 @@ let topMovies = [
         title: "Léon: The Professional",
         description: "...",
         genre: "action-thriller",
-        director: [
-            {
-                id: 3,
-                name: "Luc Besson",
-                bio: "...",
-                yearBirth: 1959,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 3,
+            name: "Luc Besson",
+            bio: "...",
+            yearBirth: 1959,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -57,15 +51,13 @@ let topMovies = [
         title: "Big Fish",
         description: "...",
         genre: "comedy-drama",
-        director: [
-            {
-                id: 4,
-                name: "Tim Burton",
-                bio: "...",
-                yearBirth: 1958,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 4,
+            name: "Tim Burton",
+            bio: "...",
+            yearBirth: 1958,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -73,15 +65,13 @@ let topMovies = [
         title: "The Last Samurai",
         description: "...",
         genre: "historical drama",
-        director: [
-            {
-                id: 5,
-                name: "Edward Zwick",
-                bio: "...",
-                yearBirth: 1952,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 5,
+            name: "Edward Zwick",
+            bio: "...",
+            yearBirth: 1952,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -89,15 +79,13 @@ let topMovies = [
         title: "Schindler\'s List",
         description: "...",
         genre: "historical drama",
-        director: [
-            {
-                id: 6,
-                name: "Steven Spielberg",
-                bio: "...",
-                yearBirth: 1946,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 6,
+            name: "Steven Spielberg",
+            bio: "...",
+            yearBirth: 1946,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -105,15 +93,13 @@ let topMovies = [
         title: "Full Metal Jacket",
         description: "...",
         genre: "war",
-        director: [
-            {
-                id: 7,
-                name: "Stanley Kubrick",
-                bio: "...",
-                yearBirth: 1928,
-                yearDeath: 1999
-            }
-        ],
+        director: {
+            id: 7,
+            name: "Stanley Kubrick",
+            bio: "...",
+            yearBirth: 1928,
+            yearDeath: 1999
+        },
         imageURL: "..."
     },
     {
@@ -121,15 +107,13 @@ let topMovies = [
         title: "The New World",
         description: "...",
         genre: "drama",
-        director: [
-            {
-                id: 8,
-                name: "Terrence Malick",
-                bio: "...",
-                yearBirth: 1943,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 8,
+            name: "Terrence Malick",
+            bio: "...",
+            yearBirth: 1943,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -137,15 +121,13 @@ let topMovies = [
         title: "Grand Budapest Hotel",
         description: "...",
         genre: "comedy-drama",
-        director: [
-            {
-                id: 9,
-                name: "Wes Anderson",
-                bio: "...",
-                yearBirth: 1969,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 9,
+            name: "Wes Anderson",
+            bio: "...",
+            yearBirth: 1969,
+            yearDeath: null
+        },
         imageURL: "..."
     },
     {
@@ -153,15 +135,13 @@ let topMovies = [
         title: "This Is England",
         description: "...",
         genre: "drama",
-        director: [
-            {
-                id: 10,
-                name: "Shane Meadows",
-                bio: "...",
-                yearBirth: 1972,
-                yearDeath: null
-            }
-        ],
+        director: {
+            id: 10,
+            name: "Shane Meadows",
+            bio: "...",
+            yearBirth: 1972,
+            yearDeath: null
+        },
         imageURL: "..."
     }
 ];
