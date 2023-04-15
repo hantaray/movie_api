@@ -48,16 +48,21 @@
                     &nbsp;&nbsp;id : 1,<br>
                     &nbsp;&nbsp;title : "Oldboy",<br>
                     &nbsp;&nbsp;description : "...",<br>
-                    &nbsp;&nbsp;genre : "Thriller",<br>
-                    &nbsp;&nbsp;director:<br>
-                    &nbsp;&nbsp;{<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: 1,<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: "Park Chan-wook",<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bio: "...",<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yearBirth: 1963,<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yearDeath: null<br>
-                    &nbsp;&nbsp;}<br>
-                    &nbsp;&nbsp;imageURL : "...",<br>
+                    &nbsp;&nbsp;genre: [<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: 1,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: "thriller",<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description: "..."<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;],<br>
+                    &nbsp;&nbsp;director: {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;id: 1,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;name: "Park Chan-wook",<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;bio: "...",<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;yearBirth: 1963,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;yearDeath: null<br>
+                    &nbsp;&nbsp;},<br>
+                    &nbsp;&nbsp;imageURL : "..."<br>
                     }
                 </div>
             </td>
@@ -73,8 +78,8 @@
                 <div style="color: blue;">
                     {<br>
                     &nbsp;&nbsp;id : 1,<br>
-                    &nbsp;&nbsp;genreName : "Thriller",<br>
-                    &nbsp;&nbsp;description : "...",<br>
+                    &nbsp;&nbsp;name : "thriller",<br>
+                    &nbsp;&nbsp;description : "..."<br>
                     }
                 </div>
             </td>
@@ -131,7 +136,7 @@
                 <br>
                 <div style="color: blue;">
                     {<br>
-                    &nbsp;&nbsp;name : "Sammmy",<br>
+                    &nbsp;&nbsp;name : "Sam",<br>
                     }
                 </div>
             </td>
@@ -140,7 +145,7 @@
                 <div style="color: blue;">
                     {<br>
                     &nbsp;&nbsp;id : 5,<br>
-                    &nbsp;&nbsp;name : "Sammmy",<br>
+                    &nbsp;&nbsp;name : "Sam",<br>
                     &nbsp;&nbsp;favoriteMovies : []<br>
                     }
                 </div>
@@ -192,7 +197,7 @@
             <td>A text message indicating that the user was deleted.</td>
         </tr>
     </table>
-    
+
 </body>
 
 </html>
