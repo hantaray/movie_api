@@ -3,6 +3,26 @@ const express = require('express'),
 
 const app = express();
 
+let users = [
+    {
+        id: 1,
+        name: "Sam",
+        favoriteMovies: [
+            "Oldboy",
+            "Taxi Driver"
+        ]
+    },
+    {
+        id: 2,
+        name: "Peter",
+        favoriteMovies: [
+            "Big Fish",
+            "The Last Samurai",
+            "Full Metal JAcket"
+        ]
+    }
+]
+
 let topMovies = [
     {
         id: 1,
@@ -157,7 +177,7 @@ app.get('/documentation', (req, res) => {
     res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/movies', (req, res) => {
+app.get('/movies/:title', (req, res) => {
     res.json(topMovies);
 });
 
