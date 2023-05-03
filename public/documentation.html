@@ -36,6 +36,13 @@
             <td>A JSON object holding data about all the movies.</td>
         </tr>
         <tr>
+            <td>Return a list of ALL users to the user</td>
+            <td>/users</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data about all the users.</td>
+        </tr>
+        <tr>
             <td>Return data about a single movie by title to the user</td>
             <td>/movies/[Title]</td>
             <td>GET</td>
@@ -136,10 +143,41 @@
             </td>
         </tr>
         <tr>
-            <td>Update the username of a user by user-id</td>
-            <td>/users/[UserID]</td>
-            <td>PUT</td>
+            <td>Return data about a user by usernam</td>
+            <td>/users/[Username]</td>
+            <td>GET</td>
             <td>None</td>
+            <td>A JSON object holding data about the user.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;id : 1,<br>
+                    &nbsp;&nbsp;name : "Wes Craven",<br>
+                    &nbsp;&nbsp;bio : "...",<br>
+                    &nbsp;&nbsp;yearBirth : 1939,<br>
+                    &nbsp;&nbsp;yearDeath : 2015,<br>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Update the data of a user by username</td>
+            <td>/users/[Username]</td>
+            <td>PUT</td>
+            <td>A JSON object holding data about the user to add.
+                Example:
+                <br>
+                <div style="color: blue;">
+                    {<br>
+                    &nbsp;&nbsp;username : "Sam",<br>
+                    &nbsp;&nbsp;email : "sam@gmail.com",<br>
+                    &nbsp;&nbsp;password : "5g§j73kl%",<br>
+                    &nbsp;&nbsp;birth_date : "1975-09-12",<br>
+                    &nbsp;&nbsp;favoriteMovies : []<br>
+                    }
+                </div>
+            </td>
             <td>A JSON object holding the updated data about the user:
                 <br>
                 <div style="color: blue;">
