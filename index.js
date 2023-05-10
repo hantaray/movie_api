@@ -43,6 +43,7 @@ require('./passport');
   Birthday: Date
 }*/
 app.post('/users', (req, res) => {
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ username: req.body.Username })
         .then((user) => {
             if (user) {
@@ -51,7 +52,7 @@ app.post('/users', (req, res) => {
                 Users.create(
                     {
                         username: req.body.Username,
-                        password: req.body.Password,
+                        password: hashedPassword,
                         email: req.body.Email,
                         birthday: req.body.Birthday
                     }
