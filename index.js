@@ -28,7 +28,7 @@ require('./passport');
   Email: String,
   Birthday: Date
 }*/
-app.post('/users', { session: false }), (req, res) => {
+app.post('/users', (req, res) => {
     Users.findOne({ username: req.body.Username })
         .then((user) => {
             if (user) {
