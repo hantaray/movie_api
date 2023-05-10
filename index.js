@@ -28,7 +28,7 @@ require('./passport');
   Email: String,
   Birthday: Date
 }*/
-app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users', { session: false }), (req, res) => {
     Users.findOne({ username: req.body.Username })
         .then((user) => {
             if (user) {
