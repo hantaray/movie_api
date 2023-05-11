@@ -32,7 +32,9 @@ userSchema.statics.hashPassword = (password) => {
 
 // Don't use arrow functions when defining instance methods! (validatePassword is an instance method)
 userSchema.methods.validatePassword = function (password) {
-    return bcrypt.compareSync(password, this.Password);
+    console.log('password', password)
+    console.log('thius.password', this.password)
+    return bcrypt.compare(password, this.Password);
 };
 
 let Movie = mongoose.model('Movie', movieSchema);

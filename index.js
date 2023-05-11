@@ -45,7 +45,7 @@ require('./passport');
   Birthday: Date
 }*/
 app.post('/users', [
-    check('Username', 'Username is required').isLength({ min: 5 }),
+    check('Username', 'Username is required').isLength({ min: 3 }),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
@@ -171,7 +171,18 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 // Update a user's info, by username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
+    check('username', 'Username is required').isLength({ min: 3 }),
+    check('username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('password', 'Password is required').not().isEmpty(),
+    check('email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+    // check the validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
     Users.findOneAndUpdate(
         { username: req.params.Username },
         {
