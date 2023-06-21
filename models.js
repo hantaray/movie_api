@@ -33,7 +33,7 @@ userSchema.statics.hashPassword = (password) => {
 // Don't use arrow functions when defining instance methods! (validatePassword is an instance method)
 userSchema.methods.validatePassword = function (password) {
     console.log('password', password)
-    console.log('thius.password', this.password)
+    console.log('this.password', this.password)
     return bcrypt.compare(password, this.Password);
 };
 
