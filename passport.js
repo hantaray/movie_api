@@ -12,7 +12,7 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 }, (username, password, done) => {
     console.log(username + '  ' + password);
-    let hashedPassword = Users.hashPassword(req.body.Password);
+    let hashedPassword = Users.hashPassword(password);
     Users.findOne({ username: username })
         .then((user) => {
             if (!user) {
