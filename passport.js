@@ -12,14 +12,15 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 }, (username, password, done) => {
     console.log(username + '  ' + password);
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ username: username })
         .then((user) => {
-            console.log("Password correct: " + user.validatePassword(password))
+            console.log("Password correct: " + user.validatePassword(hashedPassword))
             if (!user) {
                 console.log('incorrect username');
                 return done('incorrect username', false);
             }
-            else if (!user.validatePassword(password)) {
+            else if (!user.validatePassword(hashedPassword)) {
                 console.log('incorrect password');
                 return done('incorrect password', false);
             }
