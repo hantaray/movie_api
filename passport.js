@@ -18,8 +18,7 @@ passport.use(new LocalStrategy({
                 console.log('incorrect username');
                 return done('incorrect username', false);
             }
-            let hashedPassword = Users.hashPassword(password);
-            if (!user.validatePassword(hashedPassword)) {
+            if (!user.validatePassword(password)) {
                 console.log('incorrect password');
                 return done('incorrect password', false);
             }
