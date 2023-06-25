@@ -27,7 +27,7 @@ let userSchema = mongoose.Schema({
 });
 
 userSchema.statics.hashPassword = (password) => {
-    return bcrypt.hashSync(password, 10);
+    return bcrypt.hashSync(password, 5);
 };
 
 // Don't use arrow functions when defining instance methods! (validatePassword is an instance method)
