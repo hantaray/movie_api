@@ -12,9 +12,9 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 }, (username, password, done) => {
     console.log(username + '  ' + password);
-    let hashedPassword = Users.hashPassword(password);
     Users.findOne({ username: username })
         .then((user) => {
+            let hashedPassword = user.hashPassword(password);
             if (!user) {
                 console.log('incorrect username');
                 return done('incorrect username', false);
