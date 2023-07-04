@@ -70,7 +70,8 @@ app.post('/users', [
                         username: req.body.Username,
                         password: hashedPassword,
                         email: req.body.Email,
-                        birthday: req.body.Birthday
+                        birthday: req.body.Birthday,
+                        favoriteMovies: null
                     }
                 )
                     .then((user) => { res.status(201).json(user) })
