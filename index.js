@@ -190,11 +190,11 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         { username: req.params.Username },
         {
             $set: {
-                username: req.body.username,
-                password: req.body.password,
-                email: req.body.email,
-                birthday: req.body.birthday,
-                favoriteMovies: req.body.favoriteMovies,
+                username: req.body.Username,
+                password: req.body.Password,
+                email: req.body.Email,
+                birthday: req.body.Birthday,
+                favoriteMovies: req.body.FavoriteMovies,
             }
         },
         // return the updated object
