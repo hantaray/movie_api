@@ -175,10 +175,10 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 
 // Update a user's info, by username
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
-    check('username', 'Username is required').isLength({ min: 3 }),
-    check('username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('password', 'Password is required').not().isEmpty(),
-    check('email', 'Email does not appear to be valid').isEmail()
+    check('Username', 'Username is required').isLength({ min: 3 }),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
 ], (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
@@ -191,11 +191,11 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         { username: req.params.Username },
         {
             $set: {
-                username: req.body.username,
+                username: req.body.Username,
                 password: hashedPassword,
-                email: req.body.email,
-                birthday: req.body.birthday,
-                favoriteMovies: req.body.favoriteMovies,
+                email: req.body.Email,
+                birthday: req.body.Birthday,
+                favoriteMovies: req.body.FavoriteMovies,
             }
         },
         // return the updated object
