@@ -177,7 +177,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     check('Username', 'Username is required').isLength({ min: 3 }),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
+    // check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
 ], (req, res) => {
     // check the validation object for errors
