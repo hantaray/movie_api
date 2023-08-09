@@ -188,17 +188,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     }
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
-        // only update the fields that has changed
-        {
-            username: req.params.Username,
-            $or: [
-                { username: { $ne: "test" } },
-                { password: { $ne: hashedPassword } },
-                { email: { $ne: req.body.Email } },
-                { birthday: { $ne: req.body.Birthday } },
-                { favoriteMovies: { $ne: req.body.FavoriteMovies } }
-            ]
-        },
+        { username: req.params.Username },
         {
             $set: {
                 username: req.body.Username,
@@ -208,17 +198,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
                 favoriteMovies: req.body.FavoriteMovies,
             }
         },
-
-
-        // {
-        //     $set: {
-        //         username: req.body.Username,
-        //         password: hashedPassword,
-        //         email: req.body.Email,
-        //         birthday: req.body.Birthday,
-        //         favoriteMovies: req.body.FavoriteMovies,
-        //     }
-        // },
         // return the updated object
         { new: true }
     )
