@@ -192,20 +192,20 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         // only update the fields that has changed
         {
             $or: [
-                { username: { $ne: new_data.Username } },
-                { password: { $ne: new_data.hashedPassword } },
-                { email: { $ne: new_data.Email } },
-                { birthday: { $ne: new_data.Birthday } },
-                { favoriteMovies: { $ne: new_data.FavoriteMovies } }
+                { username: { $ne: req.body.Username } },
+                { password: { $ne: hashedPassword } },
+                { email: { $ne: req.body.Email } },
+                { birthday: { $ne: req.body.Birthday } },
+                { favoriteMovies: { $ne: req.body.FavoriteMovies } }
             ]
         },
         {
             $set: {
-                username: new_data.Username,
-                password: new_data.hashedPassword,
-                email: new_data.Email,
-                birthday: new_data.Birthday,
-                favoriteMovies: new_data.FavoriteMovies,
+                username: req.body.Username,
+                password: hashedPassword,
+                email: req.body.Email,
+                birthday: req.body.Birthday,
+                favoriteMovies: req.body.FavoriteMovies,
             }
         },
 
