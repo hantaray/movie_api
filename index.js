@@ -187,10 +187,10 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         return res.status(422).json({ errors: errors.array() });
     }
 
-    let newPassword = "";
 
-    yield Users.findOne({ username: req.params.Username })
+    Users.findOne({ username: req.params.Username })
         .then(function (user) {
+            let newPassword = "";
             console.log('user', user)
             // check if newPassword is hashedPassword (hashedPassword was passed)
             console.log('req.body.Password', req.body.Password)
@@ -200,30 +200,52 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
             } else {
                 newPassword = Users.hashPassword(req.body.Password);
             }
-        }).exec();
+
+            Users.findOneAndUpdate(
+                { username: req.params.Username },
+                {
+                    $set: {
+                        username: req.body.Username,
+                        password: newPassword,
+                        email: req.body.Email,
+                        birthday: req.body.Birthday,
+                        favoriteMovies: req.body.FavoriteMovies,
+                    }
+                },
+                // return the updated object
+                { new: true }
+            )
+                .then((user) => {
+                    res.json(user);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    res.status(500).send('Error: ' + error);
+                });
+        });
 
     console.log('newPassword', newPassword)
-    Users.findOneAndUpdate(
-        { username: req.params.Username },
-        {
-            $set: {
-                username: req.body.Username,
-                password: newPassword,
-                email: req.body.Email,
-                birthday: req.body.Birthday,
-                favoriteMovies: req.body.FavoriteMovies,
-            }
-        },
-        // return the updated object
-        { new: true }
-    )
-        .then((user) => {
-            res.json(user);
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-        });
+    // Users.findOneAndUpdate(
+    //     { username: req.params.Username },
+    //     {
+    //         $set: {
+    //             username: req.body.Username,
+    //             password: newPassword,
+    //             email: req.body.Email,
+    //             birthday: req.body.Birthday,
+    //             favoriteMovies: req.body.FavoriteMovies,
+    //         }
+    //     },
+    //     // return the updated object
+    //     { new: true }
+    // )
+    //     .then((user) => {
+    //         res.json(user);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //         res.status(500).send('Error: ' + error);
+    //     });
 });
 
 app.get('/', (req, res) => {
