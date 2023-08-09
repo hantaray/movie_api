@@ -195,7 +195,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
             console.log('user', user)
             // check if newPassword is hashedPassword (hashedPassword was passed)
             console.log('req.body.Password', req.body.Password)
-            if (req.body.Password === user.password) {
+            if (req.body.Password == user.password) {
                 console.log('user.password', user.password)
                 newPassword = user.password;
             }
