@@ -207,7 +207,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
                 birthday: req.body.Birthday,
                 favoriteMovies: req.body.FavoriteMovies,
             }
-        }
+        },
 
 
         // {
