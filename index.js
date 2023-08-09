@@ -191,17 +191,14 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     Users.findOne({ username: req.params.Username })
         .then(function (user) {
             let newPassword = "";
-            console.log('user', user)
             // check if newPassword is hashedPassword (hashedPassword was passed)
-            console.log('req.body.Password', req.body.Password)
-            console.log('user.password', user.password)
             if (user.password === req.body.Password) {
                 newPassword = req.body.Password;
             } else {
                 newPassword = Users.hashPassword(req.body.Password);
             }
 
-            Users.findOneAndUpdate(
+            Users.updateOne(
                 { username: req.params.Username },
                 {
                     $set: {
@@ -219,31 +216,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
                     res.json(user);
                 })
                 .catch((error) => {
-                    console.error(error);
                     res.status(500).send('Error: ' + error);
                 });
         });
-    // Users.findOneAndUpdate(
-    //     { username: req.params.Username },
-    //     {
-    //         $set: {
-    //             username: req.body.Username,
-    //             password: newPassword,
-    //             email: req.body.Email,
-    //             birthday: req.body.Birthday,
-    //             favoriteMovies: req.body.FavoriteMovies,
-    //         }
-    //     },
-    //     // return the updated object
-    //     { new: true }
-    // )
-    //     .then((user) => {
-    //         res.json(user);
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //         res.status(500).send('Error: ' + error);
-    //     });
 });
 
 app.get('/', (req, res) => {
