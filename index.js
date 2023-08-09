@@ -188,6 +188,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     }
 
     let newPassword = "";
+    hashedPassword = Users.hashPassword(req.body.Password);
 
     Users.findOne({ username: req.params.Username })
         .then(function (user) {
@@ -199,10 +200,11 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
                 newPassword = user.password;
             }
             else {
-                newPassword = Users.hashPassword(req.body.Password);
+                newPassword = hashedPassword;
             }
         })
 
+    console.log('newPassword', newPassword)
     Users.findOneAndUpdate(
         { username: req.params.Username },
         {
