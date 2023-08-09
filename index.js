@@ -190,28 +190,24 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     let newPassword = "";
 
     Users.findOne({ username: req.params.Username })
-        .exec(function (err, user) {
-            if (user.password === req.body.Password) {
+        .then((user) => {
+            console.log('user', user)
+            // check if newPassword is hashedPassword (hashedPassword was passed)
+            console.log('req.body.Password', req.body.Password)
+            if (user.password === passChange) {
                 console.log('user.password', user.password)
                 newPassword = user.password;
             }
             else {
-                console.log('test', test)
-                newPassword = Users.hashPassword(req.body.Password);
+                console.log('test')
+
+                newPassword = hashedPassword;
             }
-            // .then(function (user) {
-            //     console.log('user', user)
-            //     // check if newPassword is hashedPassword (hashedPassword was passed)
-            //     console.log('req.body.Password', req.body.Password)
-            //     if (user.password === passChange) {
-            //         console.log('user.password', user.password)
-            //         newPassword = user.password;
-            //     }
-            //     else {
-            //         console.log('test', test)
-            //         newPassword = hashedPassword;
-            //     }
-        });;
+            console.log('test2')
+        })
+        .catch((err) => {
+            console.log('err', err);
+        });
 
     console.log('newPassword', newPassword)
     Users.findOneAndUpdate(
