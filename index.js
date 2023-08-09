@@ -197,13 +197,10 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
             console.log('user.password', user.password)
             if (user.password === req.body.Password) {
                 newPassword = req.body.Password;
-            }
-            else {
-                console.log('test')
+            } else {
                 newPassword = Users.hashPassword(req.body.Password);
             }
-            console.log('test2')
-        })
+        });
 
     console.log('newPassword', newPassword)
     Users.findOneAndUpdate(
