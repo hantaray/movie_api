@@ -188,7 +188,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     }
 
     let newPassword = "";
-    let user = Users.findOne({ username: req.params.Username }).exec();
+    let user = Users.findOne({ username: req.params.Username });
     console.log('userPAssword', user.password)
 
     // check if newPassword is hashedPassword (hashedPassword was passed)
