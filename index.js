@@ -187,6 +187,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         return res.status(422).json({ errors: errors.array() });
     }
 
+    passChange = req.body.Password;
     let newPassword = "";
     hashedPassword = Users.hashPassword(req.body.Password);
 
@@ -195,11 +196,12 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
             console.log('user', user)
             // check if newPassword is hashedPassword (hashedPassword was passed)
             console.log('req.body.Password', req.body.Password)
-            if (req.body.Password == user.password) {
+            if (user.password === passChange) {
                 console.log('user.password', user.password)
                 newPassword = user.password;
             }
             else {
+                console.log('test', test)
                 newPassword = hashedPassword;
             }
         })
