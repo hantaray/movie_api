@@ -192,7 +192,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         // only update the fields that has changed
         {
             $or: [
-                { username: { $ne: req.body.Username } },
+                { username: { $ne: "test" } },
                 { password: { $ne: hashedPassword } },
                 { email: { $ne: req.body.Email } },
                 { birthday: { $ne: req.body.Birthday } },
