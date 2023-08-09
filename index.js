@@ -187,10 +187,10 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         return res.status(422).json({ errors: errors.array() });
     }
 
+    let newPassword = "";
 
-    Users.findOne({ username: req.params.Username })
+    yield Users.findOne({ username: req.params.Username })
         .then(function (user) {
-            let newPassword = "";
             console.log('user', user)
             // check if newPassword is hashedPassword (hashedPassword was passed)
             console.log('req.body.Password', req.body.Password)
@@ -200,7 +200,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
             } else {
                 newPassword = Users.hashPassword(req.body.Password);
             }
-        });
+        }).exec();
 
     console.log('newPassword', newPassword)
     Users.findOneAndUpdate(
