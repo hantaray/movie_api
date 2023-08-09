@@ -223,8 +223,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
                     res.status(500).send('Error: ' + error);
                 });
         });
-
-    console.log('newPassword', newPassword)
     // Users.findOneAndUpdate(
     //     { username: req.params.Username },
     //     {
