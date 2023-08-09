@@ -177,7 +177,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     check('Username', 'Username is required').isLength({ min: 3 }),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    // check('Password', 'Password is required').not().isEmpty(),
+    check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
 ], (req, res) => {
     // check the validation object for errors
@@ -186,13 +186,24 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
-    let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOneAndUpdate(
+
+    let newPassword = "";
+    let user = Users.findOne({ username: req.params.Username });
+
+    // check if newPassword is hashedPassword (hashedPassword was passed)
+    if (req.body.Password === user.password) {
+        newPassword = user.password;
+    }
+    else {
+        newPassword = Users.hashPassword(req.body.Password);
+    }
+
+    Users.findOneAndUpdate({ username: req.params.Username }
         { username: req.params.Username },
         {
             $set: {
                 username: req.body.Username,
-                password: hashedPassword,
+                password: newPassword,
                 email: req.body.Email,
                 birthday: req.body.Birthday,
                 favoriteMovies: req.body.FavoriteMovies,
