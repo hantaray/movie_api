@@ -191,7 +191,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
 
     Users.findOne({ username: req.params.Username })
         .exec(function (err, user) {
-            var hashed_pwd = hashPassword(pwd);
             if (user.password === req.body.Password) {
                 console.log('user.password', user.password)
                 newPassword = user.password;
