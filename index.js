@@ -192,9 +192,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     const query = Users.findOne({ username: req.params.Username });
     query.then(function (user) {
         // check if newPassword is hashedPassword (hashedPassword was passed)
+        console.log('req.body.Password', req.body.Password)
+        console.log('user.password', user.password)
         if (req.body.Password === user.password) {
-            console.log('req.body.Password', req.body.Password)
-            console.log('user.password', user.password)
             newPassword = user.password;
         }
         else {
