@@ -187,12 +187,12 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
         return res.status(422).json({ errors: errors.array() });
     }
     let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOneAndUpdate(
+    Users.updateOne(
         { username: req.params.Username },
         // only update the fields that has changed
         {
             $or: [
-                { username: { $ne: "test" } },
+                { username: { $ne: req.body.Username } },
                 { password: { $ne: hashedPassword } },
                 { email: { $ne: req.body.Email } },
                 { birthday: { $ne: req.body.Birthday } },
