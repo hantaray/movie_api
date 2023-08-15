@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 
 let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-zy6n.onrender.com',
-    'myflixone.netlify.app'];
+    'https://myflixone.netlify.app'];
 
 
 
