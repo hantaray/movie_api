@@ -84,7 +84,7 @@ app.post('/users', [
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).send('Error: ' + error);
+            res.status(500).json(error);
         });
 });
 
@@ -94,9 +94,9 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
         .then((users) => {
             res.status(200).json(users);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
         });
 });
 
@@ -108,9 +108,9 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
         .then((user) => {
             res.status(200).json(user);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
         });
 });
 
@@ -132,7 +132,7 @@ app.post('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', { s
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).send('Error: ' + error);
+            res.status(500).json(error);
         });
 });
 
@@ -154,7 +154,7 @@ app.delete('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', {
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).send('Error: ' + error);
+            res.status(500).json(error);
         });
 });
 
@@ -168,9 +168,9 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
                 res.status(200).send(req.params.Username + ' was deleted.');
             }
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
         });
 });
 
@@ -217,7 +217,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
                     res.status(200).json(user);
                 })
                 .catch((error) => {
-                    res.status(500).send('Error: ' + error);
+                    res.status(500).json(error);
                 });
         });
 });
@@ -236,9 +236,9 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
         .then((movies) => {
             res.status(200).json(movies);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
         });
 });
 
@@ -250,9 +250,9 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
         .then((movie) => {
             res.status(200).json(movie);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
         });
 });
 
@@ -265,8 +265,8 @@ app.get('/movies/genres/:GenreName', passport.authenticate('jwt', { session: fal
         .then((movie) => {
             res.status(200).json(movie.genres);
         })
-        .catch((err) => {
-            console.error(err);
+        .catch((error) => {
+            console.error(error);
             res.status(500).send('Error: ' + err);
         });
 });
@@ -278,15 +278,15 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
         .then((movie) => {
             res.status(200).json(movie.director);
         })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send('Error: ' + err);
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json(error);
         });
 });
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).json(err.stack);
 });
 
 const port = process.env.PORT || 8080;
