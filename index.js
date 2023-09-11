@@ -8,7 +8,8 @@ const express = require('express'),
     cors = require('cors'),
     { check, validationResult } = require('express-validator'),
     Movies = Models.Movie,
-    Users = Models.User;
+    Users = Models.User,
+    request = require('request');
 
 // mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true, family: 4 });
@@ -19,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 
 let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://movie-api-zy6n.onrender.com',
-    'https://myflixone.netlify.app'];
+    'https://myflixone.netlify.app', 'http://store.steampowered.com'];
 
 
 
@@ -57,7 +58,7 @@ app.post('/users', [
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(422).json({ errors: errors.array() });
     }
 
     let hashedPassword = Users.hashPassword(req.body.Password);
@@ -84,7 +85,7 @@ app.post('/users', [
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).json(error);
+            res.status(500).send('Error: ' + error);
         });
 });
 
@@ -92,11 +93,11 @@ app.post('/users', [
 app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.find()
         .then((users) => {
-            res.status(200).json(users);
+            res.status(201).json(users);
         })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).json(error);
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
 });
 
@@ -106,11 +107,11 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
         { username: req.params.Username }
     )
         .then((user) => {
-            res.status(200).json(user);
+            res.json(user);
         })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).json(error);
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
 });
 
@@ -127,12 +128,12 @@ app.post('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', { s
                 { new: true }
             )
                 .then((user) => {
-                    res.status(200).json(user);
+                    res.json(user);
                 })
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).json(error);
+            res.status(500).send('Error: ' + error);
         });
 });
 
@@ -149,12 +150,12 @@ app.delete('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', {
                 { new: true }
             )
                 .then((user) => {
-                    res.status(200).json(user);
+                    res.json(user);
                 })
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).json(error);
+            res.status(500).send('Error: ' + error);
         });
 });
 
@@ -168,9 +169,9 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
                 res.status(200).send(req.params.Username + ' was deleted.');
             }
         })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).json(error);
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
 });
 
@@ -185,7 +186,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(422).json({ errors: errors.array() });
     }
 
 
@@ -214,10 +215,10 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
                 { new: true }
             )
                 .then((user) => {
-                    res.status(200).json(user);
+                    res.json(user);
                 })
                 .catch((error) => {
-                    res.status(500).json(error);
+                    res.status(500).send('Error: ' + error);
                 });
         });
 });
@@ -234,11 +235,11 @@ app.get('/documentation', (req, res) => {
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
         .then((movies) => {
-            res.status(200).json(movies);
+            res.status(201).json(movies);
         })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).json(error);
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
 });
 
@@ -248,11 +249,11 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
         { title: req.params.Title }
     )
         .then((movie) => {
-            res.status(200).json(movie);
+            res.json(movie);
         })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).json(error);
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
 });
 
@@ -263,10 +264,10 @@ app.get('/movies/genres/:GenreName', passport.authenticate('jwt', { session: fal
         { "genres.name": req.params.GenreName }
     )
         .then((movie) => {
-            res.status(200).json(movie.genres);
+            res.json(movie.genres);
         })
-        .catch((error) => {
-            console.error(error);
+        .catch((err) => {
+            console.error(err);
             res.status(500).send('Error: ' + err);
         });
 });
@@ -276,17 +277,27 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
         { "director.name": req.params.directorName }
     )
         .then((movie) => {
-            res.status(200).json(movie.director);
+            res.json(movie.director);
         })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).json(error);
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
+});
+
+app.get('/getGameInfo', function (req, res) {
+    var url = 'http://store.steampowered.com/api/appdetails/?appids=1373510';
+    request(url, function (err, response, body) {
+        if (!err && response.statusCode < 400) {
+            console.log(body);
+            res.send(body);
+        }
+    });
 });
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json(err.stack);
+    res.status(500).send('Something broke!');
 });
 
 const port = process.env.PORT || 8080;
