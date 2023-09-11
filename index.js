@@ -8,7 +8,8 @@ const express = require('express'),
     cors = require('cors'),
     { check, validationResult } = require('express-validator'),
     Movies = Models.Movie,
-    Users = Models.User;
+    Users = Models.User,
+    request = require('request');
 
 // mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true, family: 4 });
