@@ -8,8 +8,7 @@ const express = require('express'),
     cors = require('cors'),
     { check, validationResult } = require('express-validator'),
     Movies = Models.Movie,
-    Users = Models.User,
-    request = require('request');
+    Users = Models.User;
 
 // mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true, family: 4 });
@@ -283,16 +282,6 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
             console.error(err);
             res.status(500).send('Error: ' + err);
         });
-});
-
-app.get('/getGameInfo', function (req, res) {
-    var url = 'http://store.steampowered.com/api/appdetails/?appids=1373510';
-    request(url, function (err, response, body) {
-        if (!err && response.statusCode < 400) {
-            console.log(body);
-            res.send(body);
-        }
-    });
 });
 
 app.use((err, req, res, next) => {
