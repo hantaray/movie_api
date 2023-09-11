@@ -285,10 +285,6 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
 });
 
 app.get('/getGameInfo', function (req, res) {
-    var qParams = [];
-    for (var p in req.query) {
-        qParams.push({ 'name': p, 'value': req.query[p] })
-    }
     var url = 'http://store.steampowered.com/api/appdetails/?appids=1373510';
     request(url, function (err, response, body) {
         if (!err && response.statusCode < 400) {
