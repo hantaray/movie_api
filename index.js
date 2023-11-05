@@ -159,13 +159,13 @@ app.delete('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', {
 });
 
 // Delete a user by username
-app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.findOneAndRemove({ username: req.params.Username })
+app.delete('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Users.findOneAndRemove({ username: req.params.username })
         .then((user) => {
             if (!user) {
-                res.status(400).send(req.params.Username + ' was not found');
+                res.status(400).send(req.params.username + ' was not found');
             } else {
-                res.status(200).send(req.params.Username + ' was deleted.');
+                res.status(200).send(req.params.username + ' was deleted.');
             }
         })
         .catch((err) => {
@@ -175,11 +175,11 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 // Update a user's info, by username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
-    check('Username', 'Username is required').isLength({ min: 3 }),
-    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()
+app.put('/users/:username', passport.authenticate('jwt', { session: false }), [
+    check('username', 'Username is required').isLength({ min: 3 }),
+    check('username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('password', 'Password is required').not().isEmpty(),
+    check('email', 'Email does not appear to be valid').isEmail()
 ], (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
@@ -189,25 +189,25 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
     }
 
 
-    Users.findOne({ username: req.params.Username })
+    Users.findOne({ username: req.params.username })
         .then(function (user) {
             let newPassword = "";
             // check if newPassword is hashedPassword (hashedPassword was passed)
-            if (user.password === req.body.Password) {
-                newPassword = req.body.Password;
+            if (user.password === req.body.password) {
+                newPassword = req.body.password;
             } else {
-                newPassword = Users.hashPassword(req.body.Password);
+                newPassword = Users.hashPassword(req.body.password);
             }
 
             Users.updateOne(
-                { username: req.params.Username },
+                { username: req.params.username },
                 {
                     $set: {
-                        username: req.body.Username,
+                        username: req.body.username,
                         password: newPassword,
-                        email: req.body.Email,
-                        birthday: req.body.Birthday,
-                        favoriteMovies: req.body.FavoriteMovies,
+                        email: req.body.email,
+                        birthday: req.body.birthday,
+                        favoriteMovies: req.body.favoriteMovies,
                     }
                 },
                 // return the updated object
