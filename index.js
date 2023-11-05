@@ -48,10 +48,10 @@ require('./passport');
   Birthday: Date
 }*/
 app.post('/users', [
-    check('Username', 'Username is required').isLength({ min: 3 }),
-    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()
+    check('username', 'Username is required').isLength({ min: 3 }),
+    check('username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('password', 'Password is required').not().isEmpty(),
+    check('email', 'Email does not appear to be valid').isEmail()
 ], (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
@@ -60,18 +60,18 @@ app.post('/users', [
         return res.status(422).json({ errors: errors.array() });
     }
 
-    let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOne({ username: req.body.Username })
+    let hashedPassword = Users.hashPassword(req.body.password);
+    Users.findOne({ username: req.body.username })
         .then((user) => {
             if (user) {
-                return res.status(400).send('User ' + req.body.Username + ' already exists');
+                return res.status(400).send('User ' + req.body.username + ' already exists');
             } else {
                 Users.create(
                     {
-                        username: req.body.Username,
+                        username: req.body.username,
                         password: hashedPassword,
-                        email: req.body.Email,
-                        birthday: req.body.Birthday,
+                        email: req.body.email,
+                        birthday: req.body.birthday,
                         favoriteMovies: []
                     }
                 )
@@ -101,9 +101,9 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
 });
 
 // Get a user by username
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOne(
-        { username: req.params.Username }
+        { username: req.params.username }
     )
         .then((user) => {
             res.json(user);
@@ -115,13 +115,13 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 // Add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users/:username/movies/:movietitle', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne(
-        { title: req.params.Movietitle }
+        { title: req.params.movietitle }
     )
         .then((movie) => {
             Users.findOneAndUpdate(
-                { username: req.params.Username },
+                { username: req.params.username },
                 { $push: { favoriteMovies: movie._id } },
                 // return the updated object
                 { new: true }
@@ -137,13 +137,13 @@ app.post('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', { s
 });
 
 // Remove a movie to a user's list of favorites
-app.delete('/users/:Username/movies/:Movietitle', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete('/users/:username/movies/:movietitle', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne(
-        { title: req.params.Movietitle }
+        { title: req.params.movietitle }
     )
         .then((movie) => {
             Users.findOneAndUpdate(
-                { username: req.params.Username },
+                { username: req.params.username },
                 { $pull: { "favoriteMovies": movie._id } },
                 // return the updated object
                 { new: true }
@@ -260,7 +260,7 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
 // Get data about a genre by genreName
 app.get('/movies/genres/:GenreName', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne(
-        { "genres.name": req.params.GenreName }
+        { "genres.name": req.params.genreName }
     )
         .then((movie) => {
             res.json(movie.genres);
