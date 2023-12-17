@@ -1,4 +1,6 @@
-# Movie-API
+<p align="center">
+<h1 align="center" style="margin-top: 0px;">*** Movie-API ***</h1>
+</p>
 
 A movie database API built using Express, MongoDB, and Mongoose.
 
